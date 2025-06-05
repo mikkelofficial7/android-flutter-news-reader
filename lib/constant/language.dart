@@ -19,3 +19,4 @@ const String urlBroken =
 const String cannotOpenDetailPage =
     "Couldn't open detail (detail data is empty)";
 const String relatedNews = "Related News";
+const String searchNews = "Find your topic here...";

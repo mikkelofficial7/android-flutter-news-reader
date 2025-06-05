@@ -4,7 +4,7 @@ import 'package:flutter_news_reader/constant/color.dart';
 import 'constant/language.dart';
 import 'pages/accountpage.dart';
 import 'pages/home/homepage.dart';
-import 'pages/searchpage.dart';
+import 'pages/search/searchpage.dart';
 import 'bloc/navigation_bottom/bloc.dart';
 import 'bloc/navigation_bottom/event_state.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red.shade800),
+        colorScheme: ColorScheme.fromSeed(seedColor: lightGray),
         useMaterial3: true,
       ),
       home: NavigationPage(),

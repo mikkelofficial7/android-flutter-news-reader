@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_reader/constant/color.dart';
 import 'package:flutter_news_reader/constant/enum.dart';
 import 'package:flutter_news_reader/pages/home/news_category_tab.dart';
 import 'package:flutter_news_reader/ui_component/toolbar.dart';
@@ -61,6 +62,9 @@ class HomePage extends StatelessWidget {
               child: TabBar(
                 isScrollable: true,
                 tabs: listTabButton,
+                labelColor: Colors.blue, // Active tab color
+                unselectedLabelColor: black,
+                indicatorColor: Colors.transparent,
               )),
           Expanded(
             child: TabBarView(
