@@ -8,6 +8,7 @@ class SearchApiBloc extends Bloc<SearchApiEvent, SearchApiState> {
 
     on<SearchApiEvent>((event, emit) async {
       try {
+        emit(SearchApiLoading());
         final mList = await repository.getListNews(event.query);
 
         if (mList.articles == null || mList.articles?.isEmpty == true) {
