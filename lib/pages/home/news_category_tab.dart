@@ -2,24 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_reader/bloc/home_page/bloc.dart';
 import 'package:flutter_news_reader/bloc/home_page/event_state.dart';
+import 'package:flutter_news_reader/constant/enum.dart';
 import 'package:flutter_news_reader/constant/language.dart';
 import 'package:flutter_news_reader/ui_component/empty_ui.dart';
 import 'package:flutter_news_reader/ui_component/item_news.dart';
 import 'package:flutter_news_reader/ui_component/loading_ui.dart';
 
-class HotNewsTab extends StatefulWidget {
+class NewsCategoryTab extends StatefulWidget {
+  final NewsCategory currentTab;
+  final Key currentTabState;
+
+  NewsCategoryTab({required this.currentTabState, required this.currentTab})
+      : super(key: currentTabState);
+
   @override
-  HotNewsTabState createState() => HotNewsTabState();
+  NewsCategoryState createState() => NewsCategoryState();
 }
 
-class HotNewsTabState extends State<HotNewsTab> {
+class NewsCategoryState extends State<NewsCategoryTab>
+    with AutomaticKeepAliveClientMixin {
   final HomeApiBloc apiBloc = HomeApiBloc();
 
   @override
   void initState() {
     super.initState();
-    apiBloc.add(HomeApiEvent(""));
+
+    // access variable from widget to state-widget
+    apiBloc.add(HomeApiEvent(widget.currentTab.query));
   }
+
+  // To avoid the tab being recreated every time it's selected (add also 'AutomaticKeepAliveClientMixin')
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {

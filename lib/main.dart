@@ -54,6 +54,12 @@ class _NavigationBottomState extends State<NavigationBottom> {
     AccountPage(),
   ];
 
+  void onClickTab(int index) {
+    setState(() {
+      _navigationBottomBloc.add(NavigationBottomEvent(index: index));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -61,6 +67,7 @@ class _NavigationBottomState extends State<NavigationBottom> {
       child: BlocConsumer<NavigationBottomBloc, NavigationBottomState>(
           builder: (context, state) {
             selectedIndex = state.index;
+
             return Scaffold(
               body: listTabPage[selectedIndex],
               bottomNavigationBar: BottomNavigationBar(
@@ -68,8 +75,7 @@ class _NavigationBottomState extends State<NavigationBottom> {
                 selectedItemColor: primaryColor,
                 unselectedItemColor: black,
                 onTap: (index) {
-                  _navigationBottomBloc
-                      .add(NavigationBottomEvent(index: index));
+                  onClickTab(index);
                 },
                 items: const [
                   BottomNavigationBarItem(

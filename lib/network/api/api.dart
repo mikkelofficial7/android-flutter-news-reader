@@ -13,15 +13,17 @@ class ApiProvider {
             {'country': "us", 'apiKey': ApiConstant.apiKey});
 
         final result = await http.get(uri);
+
         return BaseResponse<List<NewsModel>>.fromJson(
             json.decode(result.body),
             (json) =>
                 (json as List).map((e) => NewsModel.fromJson(e)).toList());
       } else {
         Uri uri = Uri.https(ApiConstant.baseUrl, ApiConstant.path,
-            {'category': query, 'apiKey': ApiConstant.apiKey});
+            {'q': query, 'apiKey': ApiConstant.apiKey});
 
         final result = await http.get(uri);
+
         return BaseResponse<List<NewsModel>>.fromJson(
             json.decode(result.body),
             (json) =>
