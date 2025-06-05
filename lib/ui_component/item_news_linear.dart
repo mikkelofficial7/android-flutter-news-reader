@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_reader/constant/color.dart';
 import 'package:flutter_news_reader/constant/language.dart';
+import 'package:flutter_news_reader/constant/util_constant.dart';
 import 'package:flutter_news_reader/extension/context_ext.dart';
 import 'package:flutter_news_reader/network/model/news_model.dart';
 import 'package:flutter_news_reader/extension/string_ext.dart';
@@ -9,20 +10,27 @@ import 'package:flutter_news_reader/pages/detail/detailpage.dart';
 
 class CardItemListNews extends StatefulWidget {
   final NewsModel newsModel;
+  List<NewsModel>? otherNews = [];
 
-  const CardItemListNews({required this.newsModel});
+  CardItemListNews({required this.newsModel, this.otherNews});
 
   @override
   CardItemListNewsState createState() => CardItemListNewsState();
 }
 
 class CardItemListNewsState extends State<CardItemListNews> {
-  void onClickDetail(NewsModel model) {
+  void onClickDetail(NewsModel news, List<NewsModel>? otherNews) {
     setState(() {
-      if (model.content.isNotEmpty) {
+      if (news.content.isNotEmpty) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DetailPage(newsModel: model)),
+          MaterialPageRoute(
+              builder: (context) => DetailPage(
+                    newsModel: news,
+                    listRelatedNews: (otherNews!..shuffle())
+                        .take(UtilConstant.maxOtherNews)
+                        .toList(),
+                  )),
         );
       } else {
         context.showSnackbar(cannotOpenDetailPage);
@@ -34,7 +42,7 @@ class CardItemListNewsState extends State<CardItemListNews> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onClickDetail(widget.newsModel);
+        onClickDetail(widget.newsModel, widget.otherNews);
       },
       child: Padding(
         padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),

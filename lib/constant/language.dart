@@ -18,3 +18,4 @@ const String urlBroken =
     "Could not launch URL. The URL maybe broken or wrong format...";
 const String cannotOpenDetailPage =
     "Couldn't open detail (detail data is empty)";
+const String relatedNews = "Related News";

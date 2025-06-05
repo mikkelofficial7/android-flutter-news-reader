@@ -6,11 +6,14 @@ import 'package:flutter_news_reader/constant/util_constant.dart';
 import 'package:flutter_news_reader/extension/string_ext.dart';
 import 'package:flutter_news_reader/network/model/news_model.dart';
 import 'package:flutter_news_reader/ui_component/external_link_button.dart';
+import 'package:flutter_news_reader/ui_component/item_news_grid.dart';
+import 'package:flutter_news_reader/ui_component/toolbar.dart';
 
 class DetailPage extends StatefulWidget {
-  final NewsModel newsModel; // Pass news data to this page
+  NewsModel newsModel; // Pass news data to this page
+  List<NewsModel>? listRelatedNews = [];
 
-  const DetailPage({super.key, required this.newsModel});
+  DetailPage({required this.newsModel, this.listRelatedNews});
 
   @override
   DetailPageState createState() => DetailPageState();
@@ -25,9 +28,7 @@ class DetailPageState extends State<DetailPage> {
         .split(UtilConstant.readMoreTag);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(news.title, style: TextStyle(fontWeight: FontWeight.bold)),
-      ),
+      appBar: CustomAppBar(showIconLogo: false, showBackArrow: true),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,6 +92,33 @@ class DetailPageState extends State<DetailPage> {
                     longText: splitContentWithReadMore[0],
                     linkText: readFromOriginalSource,
                     url: news.url.toString(),
+                  ),
+                  SizedBox(height: 100),
+                  Column(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          relatedNews,
+                          style: TextStyle(
+                              color: black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 200,
+                        child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: widget.listRelatedNews
+                                    ?.map((news) => CardItemGrid(
+                                          news: news,
+                                          otherNews: widget.listRelatedNews,
+                                        ))
+                                    .toList() ??
+                                []),
+                      )
+                    ],
                   )
                 ],
               ),

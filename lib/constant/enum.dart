@@ -1,7 +1,7 @@
 import 'package:flutter_news_reader/constant/language.dart';
 
 enum NewsCategory {
-  hotnews(newTab, ""),
+  hotnews(newTab, "general"),
   finance(financeTab, "finance"),
   politic(politicTab, "politic"),
   education(educationTab, "education"),

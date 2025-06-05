@@ -1,12 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_reader/bloc/home_page/bloc.dart';
 import 'package:flutter_news_reader/bloc/home_page/event_state.dart';
 import 'package:flutter_news_reader/constant/enum.dart';
 import 'package:flutter_news_reader/constant/language.dart';
+import 'package:flutter_news_reader/constant/util_constant.dart';
 import 'package:flutter_news_reader/extension/context_ext.dart';
 import 'package:flutter_news_reader/ui_component/empty_ui.dart';
-import 'package:flutter_news_reader/ui_component/item_news.dart';
+import 'package:flutter_news_reader/ui_component/item_news_linear.dart';
 import 'package:flutter_news_reader/ui_component/loading_ui.dart';
 
 class NewsCategoryTab extends StatefulWidget {
@@ -48,10 +51,16 @@ class NewsCategoryState extends State<NewsCategoryTab>
           if (state.listNews?.isEmpty == true) {
             return EmptyUi();
           } else {
+            int maxOtherNews =
+                (state.listNews?.length ?? 0) < UtilConstant.maxOtherNews
+                    ? (state.listNews?.length ?? UtilConstant.maxOtherNews)
+                    : UtilConstant.maxOtherNews;
+
             return ListView(
               children: state.listNews
                       ?.map((news) => CardItemListNews(
                             newsModel: news,
+                            otherNews: state.listNews,
                           ))
                       .toList() ??
                   [],

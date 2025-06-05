@@ -24,9 +24,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: Container(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: white,
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios, color: white),
+                      onPressed: () {
+                        Navigator.pop(context); // Handle back navigation
+                      },
                     ),
                   ),
                 ),

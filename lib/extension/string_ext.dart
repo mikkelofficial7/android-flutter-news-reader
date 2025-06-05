@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'package:flutter_news_reader/constant/util_constant.dart';
+import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 
 extension Iso8601DateParser on String {
@@ -24,5 +25,11 @@ extension StringExtensions on String {
     if (isEmpty) return "";
     return replaceAll(RegExp(r'\[\+\d+\s+chars\]'), UtilConstant.readMoreTag)
         .trim();
+  }
+
+  String parseHtmlString() {
+    final document = parse(this);
+    final String parsedString = document.body?.text ?? "";
+    return parsedString;
   }
 }
