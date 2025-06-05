@@ -22,7 +22,7 @@ class NewsModel {
       title: json['title'] ?? '',
       description: json['description'] ?? '',
       urlToImage: json['urlToImage'] ?? '',
-      author: json['author'] ?? '',
+      author: json['author'] ?? 'anonymous',
       publishedAt: json['publishedAt'],
       url: json['url'] ?? '',
       content: json['content'] ?? '',

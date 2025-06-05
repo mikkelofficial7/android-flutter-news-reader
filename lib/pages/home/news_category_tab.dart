@@ -4,6 +4,7 @@ import 'package:flutter_news_reader/bloc/home_page/bloc.dart';
 import 'package:flutter_news_reader/bloc/home_page/event_state.dart';
 import 'package:flutter_news_reader/constant/enum.dart';
 import 'package:flutter_news_reader/constant/language.dart';
+import 'package:flutter_news_reader/extension/context_ext.dart';
 import 'package:flutter_news_reader/ui_component/empty_ui.dart';
 import 'package:flutter_news_reader/ui_component/item_news.dart';
 import 'package:flutter_news_reader/ui_component/loading_ui.dart';
@@ -63,11 +64,7 @@ class NewsCategoryState extends State<NewsCategoryTab>
         return state is HomeApiError;
       }, listener: (context, state) {
         if (state is HomeApiError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(dataNotFound),
-            ),
-          );
+          context.showSnackbar(dataNotFound);
         }
       }),
     );

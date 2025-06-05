@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_reader/constant/color.dart';
+import 'package:flutter_news_reader/constant/language.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});
@@ -30,7 +31,7 @@ class LoadingPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                "Loading, please wait...",
+                loading,
                 style: TextStyle(
                   fontSize: 16,
                   color: darkGray,
