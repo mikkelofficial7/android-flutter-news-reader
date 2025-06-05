@@ -39,15 +39,23 @@ class BottomViewState extends State<BottomView> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: List.generate(
-            relatedTopic.length,
-            (index) => ItemRelatedNewsList(
-                  title: relatedTopic[index].tabCategory,
-                  apiBloc: listApiBloc[index],
-                )),
-      ),
+    return Stack(
+      children: [
+        LoadingPage(),
+        SingleChildScrollView(
+          child: Container(
+            color: white,
+            child: Column(
+              children: List.generate(
+                  relatedTopic.length,
+                  (index) => ItemRelatedNewsList(
+                        title: relatedTopic[index].tabCategory,
+                        apiBloc: listApiBloc[index],
+                      )),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
