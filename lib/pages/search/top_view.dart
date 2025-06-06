@@ -15,6 +15,7 @@ class TopView extends StatefulWidget {
 }
 
 class TopViewState extends State<TopView> {
+  final TextEditingController controller = TextEditingController();
   final FocusNode focusNode = FocusNode();
   bool isFocus = false;
 
@@ -32,6 +33,8 @@ class TopViewState extends State<TopView> {
 
   void onUnFocusEditText() {
     setState(() {
+      onTypingChanged("");
+      controller.text = "";
       FocusScope.of(context).unfocus();
     });
   }
@@ -60,6 +63,7 @@ class TopViewState extends State<TopView> {
               ),
             Expanded(
               child: TextField(
+                controller: controller,
                 onChanged: (value) {
                   onTypingChanged(value);
                 },

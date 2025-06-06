@@ -33,7 +33,6 @@ class BottomViewSearchState extends State<BottomViewSearch> {
                 return EmptyUi();
               } else {
                 return ListView(
-                  key: PageStorageKey(BottomViewSearch),
                   children: state.listNews
                           ?.map(
                             (news) => CardItemListNews(

@@ -57,7 +57,6 @@ class NewsCategoryState extends State<NewsCategoryTab>
                     : UtilConstant.maxOtherNews;
 
             return ListView(
-              key: PageStorageKey(NewsCategoryTab),
               children: state.listNews
                       ?.map((news) => CardItemListNews(
                             newsModel: news,
