@@ -4,7 +4,7 @@ import 'package:flutter_news_reader/constant/color.dart';
 import 'constant/language.dart';
 import 'pages/accountpage.dart';
 import 'pages/home/homepage.dart';
-import 'pages/search/searchpage.dart';
+import 'pages/search/search_first/search_page.dart';
 import 'bloc/navigation_bottom/bloc.dart';
 import 'bloc/navigation_bottom/event_state.dart';
 

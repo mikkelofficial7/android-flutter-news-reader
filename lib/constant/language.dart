@@ -21,3 +21,4 @@ const String cannotOpenDetailPage =
 const String relatedNews = "Related News";
 const String searchNews = "Find your topic here...";
 const String seachMinimum = "Minimum 3 characters for searching";
+const String mostSearch = "Most searches";

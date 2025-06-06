@@ -1,14 +1,10 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_news_reader/bloc/search_page/bloc.dart';
 import 'package:flutter_news_reader/bloc/search_page/event_state.dart';
 import 'package:flutter_news_reader/constant/enum.dart';
-import 'package:flutter_news_reader/constant/language.dart';
 import 'package:flutter_news_reader/constant/util_constant.dart';
-import 'package:flutter_news_reader/extension/context_ext.dart';
-import 'package:flutter_news_reader/pages/search/bottom_view.dart';
-import 'package:flutter_news_reader/pages/search/bottom_view_search.dart';
+import 'package:flutter_news_reader/pages/search/search_first/bottom_view.dart';
+import 'package:flutter_news_reader/pages/search/search_second/search_list.dart';
 import 'package:flutter_news_reader/pages/search/top_view.dart';
 import 'package:flutter_news_reader/ui_component/toolbar.dart';
 
@@ -18,8 +14,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class SearchPageState extends State<SearchPage> {
-  SearchApiBloc searchApiBloc = SearchApiBloc();
-
   final List<SearchApiBloc> listApiBloc = [
     SearchApiBloc(),
     SearchApiBloc(),
@@ -31,10 +25,6 @@ class SearchPageState extends State<SearchPage> {
       .take(UtilConstant.maxOtherNews)
       .toList();
 
-  bool isFocused = false;
-  String querySearch = "";
-  Timer? debounce;
-
   @override
   void initState() {
     super.initState();
@@ -44,38 +34,22 @@ class SearchPageState extends State<SearchPage> {
     });
   }
 
-  void onEditTextFocus(bool isFocus) {
+  void onClick() {
     setState(() {
-      isFocused = isFocus;
-    });
-  }
-
-  void onTypingChanged(String value) {
-    querySearch = value;
-    if (debounce?.isActive ?? false) debounce!.cancel();
-
-    debounce = Timer(const Duration(milliseconds: 2000), () {
-      if (value.isNotEmpty && value.length >= 3) {
-        searchApiBloc.add(SearchApiEvent(value));
-      } else if (value.isNotEmpty) {
-        context.showSnackbar(seachMinimum);
-      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Searchlist()),
+      );
     });
   }
 
   @override
   void dispose() {
-    debounce?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (searchApiBloc.isClosed) {
-      searchApiBloc = SearchApiBloc();
-      onTypingChanged(querySearch);
-    }
-
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -86,16 +60,14 @@ class SearchPageState extends State<SearchPage> {
             showIconLogo: true,
           ),
           TopView(
-            onEditTextFocus: onEditTextFocus,
-            onTypingChanged: onTypingChanged,
+            isFocusable: false,
+            showBackButton: false,
+            onClick: onClick,
           ),
-          if (isFocused)
-            BottomViewSearch(searchApiBloc: searchApiBloc)
-          else
-            BottomView(
-              relatedTopic: relatedTopic,
-              listApiBloc: listApiBloc,
-            )
+          BottomView(
+            relatedTopic: relatedTopic,
+            listApiBloc: listApiBloc,
+          )
         ],
       ),
     );
