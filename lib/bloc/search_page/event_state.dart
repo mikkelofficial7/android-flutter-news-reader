@@ -19,6 +19,8 @@ class SearchApiState extends Equatable {
 }
 
 // like sealed class for state management
+class SearchApiIdle extends SearchApiState {}
+
 class SearchApiLoading extends SearchApiState {}
 
 class SearchApiSuccess extends SearchApiState {

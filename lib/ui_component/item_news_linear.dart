@@ -78,31 +78,34 @@ class CardItemListNewsState extends State<CardItemListNews> {
             ),
             SizedBox(width: 8),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.newsModel.title,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 4),
-                  Text(widget.newsModel.description,
-                      maxLines: 3, overflow: TextOverflow.ellipsis),
-                  SizedBox(height: 4),
-                  Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.only(right: 10),
-                      child: Text(
-                        "${publishedAt} ${widget.newsModel.publishedAt.convertISO8601_toDateTime("dd-MM-yyyy")}",
-                        maxLines: 1,
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      )),
-                ],
+              child: Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.newsModel.title,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 4),
+                    Text(widget.newsModel.description,
+                        maxLines: 3, overflow: TextOverflow.ellipsis),
+                    SizedBox(height: 4),
+                    Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.only(right: 10),
+                        child: Text(
+                          "${publishedAt} ${widget.newsModel.publishedAt.convertISO8601_toDateTime("dd-MM-yyyy")}",
+                          maxLines: 1,
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        )),
+                  ],
+                ),
               ),
             ),
           ]),

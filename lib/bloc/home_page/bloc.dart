@@ -7,6 +7,7 @@ class HomeApiBloc extends Bloc<HomeApiEvent, HomeApiState> {
     final Repository repository = Repository();
 
     on<HomeApiEvent>((event, emit) async {
+      emit(HomeApiLoading());
       try {
         final mList = await repository.getListNews(event.query);
 

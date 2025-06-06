@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_news_reader/constant/color.dart';
 import 'package:flutter_news_reader/constant/language.dart';
 
 class TopView extends StatefulWidget {
   final void Function(bool) onEditTextFocus;
+  final void Function(String) onTypingChanged;
 
-  TopView({required this.onEditTextFocus});
+  TopView({required this.onEditTextFocus, required this.onTypingChanged});
 
   @override
   TopViewState createState() => TopViewState();
@@ -33,6 +36,12 @@ class TopViewState extends State<TopView> {
     });
   }
 
+  void onTypingChanged(String value) {
+    setState(() {
+      widget.onTypingChanged(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -50,26 +59,31 @@ class TopViewState extends State<TopView> {
                 },
               ),
             Expanded(
-                child: TextField(
-              focusNode: focusNode,
-              style: TextStyle(color: black),
-              decoration: InputDecoration(
-                hintText: searchNews,
-                hintStyle: TextStyle(color: secondaryColor),
-                prefixIcon: Icon(
-                  Icons.search_rounded,
-                  color: secondaryColor,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: secondaryColor), // Normal state
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: secondaryColor), // On focus
-                  borderRadius: BorderRadius.circular(12),
+              child: TextField(
+                onChanged: (value) {
+                  onTypingChanged(value);
+                },
+                focusNode: focusNode,
+                style: TextStyle(color: black),
+                decoration: InputDecoration(
+                  hintText: searchNews,
+                  hintStyle: TextStyle(color: secondaryColor),
+                  prefixIcon: Icon(
+                    Icons.search_rounded,
+                    color: secondaryColor,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: secondaryColor), // Normal state
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: secondaryColor), // On focus
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
-            ))
+            )
           ],
         ),
       ),

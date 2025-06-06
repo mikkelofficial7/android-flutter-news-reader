@@ -3,7 +3,7 @@ import 'package:flutter_news_reader/bloc/search_page/event_state.dart';
 import 'package:flutter_news_reader/network/repository/repository.dart';
 
 class SearchApiBloc extends Bloc<SearchApiEvent, SearchApiState> {
-  SearchApiBloc() : super(SearchApiLoading()) {
+  SearchApiBloc() : super(SearchApiIdle()) {
     final Repository repository = Repository();
 
     on<SearchApiEvent>((event, emit) async {

@@ -20,3 +20,4 @@ const String cannotOpenDetailPage =
     "Couldn't open detail (detail data is empty)";
 const String relatedNews = "Related News";
 const String searchNews = "Find your topic here...";
+const String seachMinimum = "Minimum 3 characters for searching";
