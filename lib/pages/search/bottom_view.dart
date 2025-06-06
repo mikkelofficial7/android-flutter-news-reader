@@ -47,8 +47,10 @@ class BottomViewState extends State<BottomView> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Expanded(
+        child: SingleChildScrollView(
       child: Container(
+        padding: EdgeInsets.all(10),
         color: Colors.transparent,
         child: Column(
           children: List.generate(
@@ -59,7 +61,7 @@ class BottomViewState extends State<BottomView> {
                   )),
         ),
       ),
-    );
+    ));
   }
 }
 

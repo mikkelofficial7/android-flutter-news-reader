@@ -16,11 +16,7 @@ class SearchPage extends StatelessWidget {
             showIconLogo: true,
           ),
           TopView(),
-          Expanded(
-              child: Padding(
-            padding: EdgeInsets.all(10),
-            child: BottomView(),
-          ))
+          BottomView()
         ],
       ),
     );
