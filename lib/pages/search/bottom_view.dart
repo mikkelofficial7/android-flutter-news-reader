@@ -28,6 +28,14 @@ class BottomViewState extends State<BottomView> {
       .take(UtilConstant.maxOtherNews)
       .toList();
 
+  bool isLoadFinish = false;
+
+  void onFinishLoad(bool isFinish) {
+    setState(() {
+      isLoadFinish = isFinish;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,23 +47,18 @@ class BottomViewState extends State<BottomView> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        LoadingPage(),
-        SingleChildScrollView(
-          child: Container(
-            color: white,
-            child: Column(
-              children: List.generate(
-                  relatedTopic.length,
-                  (index) => ItemRelatedNewsList(
-                        title: relatedTopic[index].tabCategory,
-                        apiBloc: listApiBloc[index],
-                      )),
-            ),
-          ),
-        )
-      ],
+    return SingleChildScrollView(
+      child: Container(
+        color: Colors.transparent,
+        child: Column(
+          children: List.generate(
+              relatedTopic.length,
+              (index) => ItemRelatedNewsList(
+                    title: relatedTopic[index].tabCategory,
+                    apiBloc: listApiBloc[index],
+                  )),
+        ),
+      ),
     );
   }
 }
@@ -81,7 +84,22 @@ class ItemRelatedNewsListState extends State<ItemRelatedNewsList> {
         }, builder: (context, state) {
           if (state is SearchApiSuccess) {
             if (state.listNews?.isEmpty == true) {
-              return EmptyUi();
+              return Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.only(top: 10),
+                    child: Text(
+                      widget.title,
+                      style: TextStyle(
+                          color: black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  EmptyUi()
+                ],
+              );
             } else {
               return Column(
                 children: [
@@ -111,7 +129,22 @@ class ItemRelatedNewsListState extends State<ItemRelatedNewsList> {
               );
             }
           } else {
-            return LoadingPage();
+            return Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    widget.title,
+                    style: TextStyle(
+                        color: black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                LoadingPage()
+              ],
+            );
           }
         }, listenWhen: (context, state) {
           return state is SearchApiError;

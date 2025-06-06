@@ -11,3 +11,9 @@ extension StringExtensions on BuildContext {
     );
   }
 }
+
+extension ContextExtensions on BuildContext {
+  double getDeviceHeight() {
+    return MediaQuery.of(this).size.height;
+  }
+}

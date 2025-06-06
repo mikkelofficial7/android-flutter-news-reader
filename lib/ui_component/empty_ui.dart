@@ -6,21 +6,28 @@ class EmptyUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.newspaper_rounded, size: 64, color: black),
-          const SizedBox(height: 16),
-          Text(
-            dataNotFound,
-            style: TextStyle(
-              fontSize: 16,
-              color: black,
-              fontWeight: FontWeight.w500,
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/images/empty.png',
+              width: 60,
+              height: 60,
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+            const SizedBox(height: 16),
+            Text(
+              dataNotFound,
+              style: TextStyle(
+                fontSize: 16,
+                color: black,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

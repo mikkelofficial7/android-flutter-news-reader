@@ -7,39 +7,31 @@ class LoadingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.newspaper,
-                size: 64,
-                color: darkGray,
+    return Center(
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: const LinearProgressIndicator(
+                minHeight: 8,
+                backgroundColor: lightGray,
+                valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
               ),
-              const SizedBox(height: 24),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: const LinearProgressIndicator(
-                  minHeight: 8,
-                  backgroundColor: lightGray,
-                  valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
-                ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              loading,
+              style: TextStyle(
+                fontSize: 16,
+                color: black,
+                fontWeight: FontWeight.w500,
               ),
-              const SizedBox(height: 24),
-              Text(
-                loading,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: darkGray,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     );
