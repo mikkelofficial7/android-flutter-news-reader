@@ -6,7 +6,6 @@ import 'package:flutter_news_reader/constant/language.dart';
 import 'package:flutter_news_reader/extension/context_ext.dart';
 import 'package:flutter_news_reader/ui_component/empty_ui.dart';
 import 'package:flutter_news_reader/ui_component/item_news_linear.dart';
-import 'package:flutter_news_reader/ui_component/loading_search_ui.dart';
 import 'package:flutter_news_reader/ui_component/loading_ui.dart';
 
 class BottomViewSearch extends StatefulWidget {
