@@ -103,6 +103,7 @@ class ItemRelatedNewsListState extends State<ItemRelatedNewsList> {
                   SizedBox(
                     height: 200,
                     child: ListView(
+                        key: PageStorageKey(BottomView),
                         scrollDirection: Axis.horizontal,
                         children: state.listNews
                                 ?.map((news) => CardItemGrid(

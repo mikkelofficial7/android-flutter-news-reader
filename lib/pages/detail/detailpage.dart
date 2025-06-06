@@ -109,6 +109,7 @@ class DetailPageState extends State<DetailPage> {
                       SizedBox(
                         height: 200,
                         child: ListView(
+                            key: PageStorageKey(DetailPage),
                             scrollDirection: Axis.horizontal,
                             children: widget.listRelatedNews
                                     ?.map((news) => CardItemGrid(

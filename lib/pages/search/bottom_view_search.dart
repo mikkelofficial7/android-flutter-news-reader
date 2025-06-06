@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_reader/bloc/search_page/bloc.dart';
 import 'package:flutter_news_reader/bloc/search_page/event_state.dart';
 import 'package:flutter_news_reader/constant/language.dart';
-import 'package:flutter_news_reader/constant/util_constant.dart';
 import 'package:flutter_news_reader/extension/context_ext.dart';
 import 'package:flutter_news_reader/ui_component/empty_ui.dart';
 import 'package:flutter_news_reader/ui_component/item_news_linear.dart';
+import 'package:flutter_news_reader/ui_component/loading_search_ui.dart';
 import 'package:flutter_news_reader/ui_component/loading_ui.dart';
 
 class BottomViewSearch extends StatefulWidget {
@@ -34,6 +34,7 @@ class BottomViewSearchState extends State<BottomViewSearch> {
                 return EmptyUi();
               } else {
                 return ListView(
+                  key: PageStorageKey(BottomViewSearch),
                   children: state.listNews
                           ?.map(
                             (news) => CardItemListNews(

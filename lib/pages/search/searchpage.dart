@@ -18,13 +18,13 @@ class SearchPage extends StatefulWidget {
 }
 
 class SearchPageState extends State<SearchPage> {
+  SearchApiBloc searchApiBloc = SearchApiBloc();
+
   final List<SearchApiBloc> listApiBloc = [
     SearchApiBloc(),
     SearchApiBloc(),
     SearchApiBloc()
   ];
-
-  SearchApiBloc searchApiBloc = SearchApiBloc();
 
   final List<NewsCategory> relatedTopic = (NewsCategory.values.toList()
         ..shuffle())
@@ -32,6 +32,7 @@ class SearchPageState extends State<SearchPage> {
       .toList();
 
   bool isFocused = false;
+  String querySearch = "";
   Timer? debounce;
 
   @override
@@ -50,13 +51,12 @@ class SearchPageState extends State<SearchPage> {
   }
 
   void onTypingChanged(String value) {
+    querySearch = value;
     if (debounce?.isActive ?? false) debounce!.cancel();
 
     debounce = Timer(const Duration(milliseconds: 2000), () {
       if (value.isNotEmpty && value.length >= 3) {
-        if (!searchApiBloc.isClosed) {
-          searchApiBloc.add(SearchApiEvent(value));
-        }
+        searchApiBloc.add(SearchApiEvent(value));
       } else if (value.isNotEmpty) {
         context.showSnackbar(seachMinimum);
       }
@@ -65,14 +65,16 @@ class SearchPageState extends State<SearchPage> {
 
   @override
   void dispose() {
-    searchApiBloc.close();
     debounce?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (searchApiBloc.isClosed) searchApiBloc = SearchApiBloc();
+    if (searchApiBloc.isClosed) {
+      searchApiBloc = SearchApiBloc();
+      onTypingChanged(querySearch);
+    }
 
     return Container(
       height: double.infinity,
