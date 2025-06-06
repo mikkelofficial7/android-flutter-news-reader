@@ -56,8 +56,6 @@ class SearchPageState extends State<SearchPage> {
       if (value.isNotEmpty && value.length >= 3) {
         if (!searchApiBloc.isClosed) {
           searchApiBloc.add(SearchApiEvent(value));
-        } else {
-          context.showSnackbar("bloc shutdown");
         }
       } else if (value.isNotEmpty) {
         context.showSnackbar(seachMinimum);
@@ -74,6 +72,8 @@ class SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (searchApiBloc.isClosed) searchApiBloc = SearchApiBloc();
+
     return Container(
       height: double.infinity,
       width: double.infinity,
