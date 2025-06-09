@@ -6,9 +6,13 @@ import 'package:flutter_news_reader/constant/util_constant.dart';
 import 'package:flutter_news_reader/pages/search/search_first/bottom_view.dart';
 import 'package:flutter_news_reader/pages/search/search_second/search_list.dart';
 import 'package:flutter_news_reader/pages/search/top_view.dart';
+import 'package:flutter_news_reader/route/navigation_db_validation.dart';
+import 'package:flutter_news_reader/route/base/base_navigation_service.dart';
 import 'package:flutter_news_reader/ui_component/toolbar.dart';
 
 class SearchPage extends StatefulWidget {
+  SearchPage({Key? key}) : super(key: key);
+
   @override
   SearchPageState createState() => SearchPageState();
 }
@@ -36,10 +40,9 @@ class SearchPageState extends State<SearchPage> {
 
   void onClick() {
     setState(() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Searchlist()),
-      );
+      UserRoute.checkUserLoginStatus(() {
+        NavigationService.navigateTo(Searchlist());
+      });
     });
   }
 

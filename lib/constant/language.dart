@@ -22,3 +22,13 @@ const String relatedNews = "Related News";
 const String searchNews = "Find your topic here...";
 const String seachMinimum = "Minimum 3 characters for searching";
 const String mostSearch = "Most searches";
+const String logout = "Sign out";
+const String loginOrRegister = "Login or Register with Google to continue";
+const String continueWithGoogle = "Continue with Google";
+const String welcomeTo = "Welcome to";
+const String signOutSuccess = "Sign out successfully";
+const String loginSuccess = "Login successfully";
+
+const String askSignOut = "Do you want to sign out?";
+const String yes = "Sign Out";
+const String no = "Cancel";

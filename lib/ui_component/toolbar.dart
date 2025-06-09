@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_reader/constant/color.dart';
 import 'package:flutter_news_reader/constant/language.dart';
+import 'package:flutter_news_reader/route/base/base_navigation_service.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   static const double toolbarHeight = 80; // default is using kToolbarHeight
@@ -27,7 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     child: IconButton(
                       icon: Icon(Icons.arrow_back_ios, color: white),
                       onPressed: () {
-                        Navigator.pop(context); // Handle back navigation
+                        NavigationService.pop();
                       },
                     ),
                   ),

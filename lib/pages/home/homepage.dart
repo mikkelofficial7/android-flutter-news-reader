@@ -5,6 +5,8 @@ import 'package:flutter_news_reader/pages/home/news_category_tab.dart';
 import 'package:flutter_news_reader/ui_component/toolbar.dart';
 
 class HomePage extends StatelessWidget {
+  HomePage({Key? key}) : super(key: key);
+
   final List<Widget> listTabButton = [
     Tab(icon: Icon(Icons.whatshot), text: NewsCategory.hotnews.tabCategory),
     Tab(

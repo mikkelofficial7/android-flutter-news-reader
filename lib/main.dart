@@ -1,19 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news_reader/constant/api_constant.dart';
 import 'package:flutter_news_reader/constant/color.dart';
+import 'package:flutter_news_reader/pages/profile/accountpage.dart';
+import 'package:flutter_news_reader/route/navigation_db_validation.dart';
+import 'package:flutter_news_reader/route/base/base_navigation_service.dart';
+import 'package:flutter_news_reader/pages/login/loginpage.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'constant/language.dart';
-import 'pages/accountpage.dart';
 import 'pages/home/homepage.dart';
 import 'pages/search/search_first/search_page.dart';
 import 'bloc/navigation_bottom/bloc.dart';
 import 'bloc/navigation_bottom/event_state.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(); // initiate firebase auth
+  await Supabase.initialize(
+    url: ApiConstant.supabaseUrl,
+    anonKey: ApiConstant.supabaseKey,
+  ); // initiate supabase
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      navigatorKey: NavigationService.navigatorKey,
+      home: ParentApp(),
+    );
+  }
+}
+
+class ParentApp extends StatelessWidget {
+  const ParentApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +72,13 @@ class _NavigationBottomState extends State<NavigationBottom> {
   int selectedIndex = 0;
   final NavigationBottomBloc _navigationBottomBloc = NavigationBottomBloc();
 
+  bool isLoggedIn = UserRoute.isUserLoginByGoogle();
+
   final List<Widget> listTabPage = [
     HomePage(),
     SearchPage(),
-    AccountPage(),
-  ];
+    UserRoute.isUserLoginByGoogle() ? AccountPage() : LoginPage()
+  ]; // check list tab last index, if login then add accountPage() if no then add loginPage()
 
   void onClickTab(int index) {
     setState(() {

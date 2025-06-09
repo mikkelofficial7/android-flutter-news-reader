@@ -39,6 +39,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   url_launcher: ^6.2.4
   html: ^0.15.0
+  google_sign_in: ^6.1.5
+  supabase_flutter: ^1.10.25
+  firebase_core: ^2.30.0
+  firebase_auth: ^4.17.4
 
 
 
@@ -61,6 +65,7 @@ flutter:
   assets:
       - assets/images/no_image.jpg
       - assets/images/empty.png
+      - assets/images/google_logo.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

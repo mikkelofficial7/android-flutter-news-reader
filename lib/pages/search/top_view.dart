@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_reader/constant/color.dart';
 import 'package:flutter_news_reader/constant/language.dart';
-import 'package:flutter_news_reader/extension/context_ext.dart';
+import 'package:flutter_news_reader/route/base/base_navigation_service.dart';
 
 class TopView extends StatefulWidget {
   final bool showBackButton;
@@ -79,7 +79,7 @@ class TopViewState extends State<TopView> {
                   IconButton(
                     icon: Icon(Icons.arrow_back_ios, color: secondaryColor),
                     onPressed: () {
-                      Navigator.pop(context);
+                      NavigationService.pop();
                     },
                   ),
                 Expanded(

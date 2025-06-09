@@ -7,6 +7,8 @@ import 'package:flutter_news_reader/extension/context_ext.dart';
 import 'package:flutter_news_reader/network/model/news_model.dart';
 import 'package:flutter_news_reader/extension/string_ext.dart';
 import 'package:flutter_news_reader/pages/detail/detailpage.dart';
+import 'package:flutter_news_reader/route/navigation_db_validation.dart';
+import 'package:flutter_news_reader/route/base/base_navigation_service.dart';
 
 class CardItemListNews extends StatefulWidget {
   final NewsModel newsModel;
@@ -22,16 +24,14 @@ class CardItemListNewsState extends State<CardItemListNews> {
   void onClickDetail(NewsModel news, List<NewsModel>? otherNews) {
     setState(() {
       if (news.content.isNotEmpty) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => DetailPage(
-                    newsModel: news,
-                    listRelatedNews: (otherNews!..shuffle())
-                        .take(UtilConstant.maxOtherNews)
-                        .toList(),
-                  )),
-        );
+        UserRoute.checkUserLoginStatus(() {
+          NavigationService.navigateTo(DetailPage(
+            newsModel: news,
+            listRelatedNews: (otherNews!..shuffle())
+                .take(UtilConstant.maxOtherNews)
+                .toList(),
+          ));
+        });
       } else {
         context.showSnackbar(cannotOpenDetailPage);
       }

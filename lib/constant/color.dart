@@ -13,3 +13,4 @@ const Color lightGray = Color.fromARGB(255, 222, 220, 220); // Light Grey
 const Color darkGray = Color.fromARGB(255, 131, 131, 131); // Dark Grey
 const Color white = Color.fromARGB(255, 245, 244, 244); // White
 const Color black = Color.fromARGB(255, 19, 18, 18); // Black
+const Color red = Color.fromARGB(255, 152, 33, 33); // Red
