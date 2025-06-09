@@ -103,36 +103,77 @@ class AccountPage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                Text(
-                  "${snapshot.data?.firstName ?? ""} ${snapshot.data?.lastName ?? ""}",
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.person, color: black),
+                    const SizedBox(width: 8),
+                    Text(
+                      "${snapshot.data?.firstName ?? "-"} ${snapshot.data?.lastName ?? ""}",
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 8),
-                Text(
-                  snapshot.data?.email ?? "",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: darkGray,
-                  ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.email, color: black, size: 20),
+                    const SizedBox(width: 6),
+                    Text(
+                      snapshot.data?.email ?? "",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: darkGray,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 24),
-                ElevatedButton.icon(
-                  onPressed: () => doSignOut(context),
-                  icon: const Icon(
-                    Icons.logout,
-                    color: white,
-                  ),
-                  label: const Text(logout),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 12),
-                    backgroundColor: red,
-                    foregroundColor: white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.phone, color: black, size: 20),
+                    const SizedBox(width: 6),
+                    Text(
+                      (snapshot.data?.phone?.isNotEmpty == true
+                              ? snapshot.data!.phone
+                              : "+00-0000000000") ??
+                          "",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: darkGray,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: ElevatedButton.icon(
+                    onPressed: () => doSignOut(context),
+                    icon: const Icon(
+                      Icons.logout,
+                      color: white,
+                    ),
+                    label: const Text(
+                      logout,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: red,
+                      foregroundColor: white,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      elevation: 3,
+                      shadowColor: red.withOpacity(0.4),
                     ),
                   ),
                 ),
