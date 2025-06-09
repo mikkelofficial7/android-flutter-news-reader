@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_reader/_supabase_firebase/firebase_authentication.dart';
+import 'package:flutter_news_reader/_supabase_firebase/base/firebase_authentication.dart';
+import 'package:flutter_news_reader/_supabase_firebase/user_auth.dart';
 import 'package:flutter_news_reader/constant/color.dart';
 import 'package:flutter_news_reader/constant/language.dart';
 import 'package:flutter_news_reader/main.dart';
@@ -17,13 +18,36 @@ class LoginPageState extends State<LoginPage> {
     final loginData = await FirebaseAuthentication().doSignInWithGoogle();
 
     if (loginData != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(loginSuccess)),
-      );
+      var isUserOnDb =
+          await UserAuth.checkDbUserExist(loginData.user?.email ?? "");
 
-      await Future.delayed(const Duration(milliseconds: 1500));
+      if (!isUserOnDb) {
+        List<String> arrayName = (loginData.user?.displayName ?? "").split(" ");
+        String firstName = arrayName.isNotEmpty ? arrayName[0] : "";
+        String lastName = arrayName.length > 1 ? arrayName[1] : "";
+        String email = loginData.user?.email ?? "";
+        String phone = loginData.user?.phoneNumber ?? "";
+        String photoUrl = loginData.user?.photoURL ?? "";
 
-      NavigationService.navigateTo(ParentApp());
+        await UserAuth.insertUserData(
+            email, phone, firstName, lastName, photoUrl);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text(loginSuccess)),
+        );
+
+        await Future.delayed(const Duration(milliseconds: 1500));
+
+        NavigationService.navigateTo(ParentApp());
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text(loginSuccess)),
+        );
+
+        await Future.delayed(const Duration(milliseconds: 1500));
+
+        NavigationService.navigateTo(ParentApp());
+      }
     }
   }
 

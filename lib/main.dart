@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_news_reader/constant/api_constant.dart';
 import 'package:flutter_news_reader/constant/color.dart';
 import 'package:flutter_news_reader/pages/profile/accountpage.dart';
-import 'package:flutter_news_reader/route/navigation_db_validation.dart';
+import 'package:flutter_news_reader/_supabase_firebase/user_auth.dart';
 import 'package:flutter_news_reader/route/base/base_navigation_service.dart';
 import 'package:flutter_news_reader/pages/login/loginpage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -72,12 +72,12 @@ class _NavigationBottomState extends State<NavigationBottom> {
   int selectedIndex = 0;
   final NavigationBottomBloc _navigationBottomBloc = NavigationBottomBloc();
 
-  bool isLoggedIn = UserRoute.isUserLoginByGoogle();
+  bool isLoggedIn = UserAuth.isUserLoginByGoogle();
 
   final List<Widget> listTabPage = [
     HomePage(),
     SearchPage(),
-    UserRoute.isUserLoginByGoogle() ? AccountPage() : LoginPage()
+    UserAuth.isUserLoginByGoogle() ? AccountPage() : LoginPage()
   ]; // check list tab last index, if login then add accountPage() if no then add loginPage()
 
   void onClickTab(int index) {

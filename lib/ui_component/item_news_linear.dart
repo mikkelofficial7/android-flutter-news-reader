@@ -7,7 +7,7 @@ import 'package:flutter_news_reader/extension/context_ext.dart';
 import 'package:flutter_news_reader/network/model/news_model.dart';
 import 'package:flutter_news_reader/extension/string_ext.dart';
 import 'package:flutter_news_reader/pages/detail/detailpage.dart';
-import 'package:flutter_news_reader/route/navigation_db_validation.dart';
+import 'package:flutter_news_reader/_supabase_firebase/user_auth.dart';
 import 'package:flutter_news_reader/route/base/base_navigation_service.dart';
 
 class CardItemListNews extends StatefulWidget {
@@ -24,7 +24,7 @@ class CardItemListNewsState extends State<CardItemListNews> {
   void onClickDetail(NewsModel news, List<NewsModel>? otherNews) {
     setState(() {
       if (news.content.isNotEmpty) {
-        UserRoute.checkUserLoginStatus(() {
+        UserAuth.checkUserLoginStatus(() {
           NavigationService.navigateTo(DetailPage(
             newsModel: news,
             listRelatedNews: (otherNews!..shuffle())
